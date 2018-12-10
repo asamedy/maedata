@@ -1,0 +1,10 @@
+library(curatedTCGAData)
+library(TCGAutils)
+library(TCGAbiolinks)
+library(RCTGAtoolbox)
+
+curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = TRUE)
+
+ov <- curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = FALSE)
+colData(ov)
+getClinicalNames("OV")
