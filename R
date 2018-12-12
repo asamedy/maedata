@@ -8,3 +8,70 @@ curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = TRUE)
 ov <- curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = FALSE)
 colData(ov)
 getClinicalNames("OV")
+#tcgabiolinks get ov data
+ovtcgabio <- GDCquery_clinic("TCGA-OV", type = "clinical", save.csv = TRUE)
+#subtypes
+subtypes <- PanCancerAtlas_subtypes()
+> DT::datatable(subtypes,
+                +               filter = 'top',
+                +               options = list(scrollX = TRUE, keys = TRUE, pageLength = 5),
+                +               rownames = FALSE)
+> ovtcgabio <- GDCquery_clinic("TCGA-OV", type = "clinical", save.csv = TRUE)
+
+#RCTA
+ovrtcg <- getFirehoseData(dataset="OV",
+                          forceDownload=TRUE, clinical=TRUE, Mutation=TRUE, RPPAArray = TRUE)
+
+
+intersect(rownames(colData(ov)), )
+
+# find Differences
+discrep <- mapply(setdiff, ov, ovtcgabio)
+?setdiff
+
+## uco plots between two datasets (after isolating same patients)
+
+## subset for patients in both subtype datasets (intersect)
+
+## compare subtype variables in both datasets
+library(curatedTCGAData)
+library(TCGAutils)
+library(TCGAbiolinks)
+library(RCTGAtoolbox)
+
+curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = TRUE)
+
+ov <- curatedTCGAData("OV", c("RNA*", "RPPA*", "Mutations"), dry.run = FALSE)
+colData(ov)
+getClinicalNames("OV")
+
+#subtypes
+TCGAutils::getSubtypeMap(ov)
+head(metadata(colData(ov))[["subtypes"]]) 
+
+#tcgabiolinks get ov data
+ovtcgabio <- GDCquery_clinic("TCGA-OV", type = "clinical", save.csv = TRUE)
+#subtypes
+subtypes <- PanCancerAtlas_subtypes()
+> DT::datatable(subtypes,
+                +               filter = 'top',
+                +               options = list(scrollX = TRUE, keys = TRUE, pageLength = 5),
+                +               rownames = FALSE)
+> ovtcgabio <- GDCquery_clinic("TCGA-OV", type = "clinical", save.csv = TRUE)
+
+#RCTA
+ovrtcg <- getFirehoseData(dataset="OV",
+                          forceDownload=TRUE, clinical=TRUE, Mutation=TRUE, RPPAArray = TRUE)
+
+
+intersect(rownames(colData(ov)), )
+
+# find Differences
+discrep <- mapply(setdiff, ov, ovtcgabio)
+?setdiff
+
+## uco plots between two datasets (after isolating same patients)
+
+## subset for patients in both subtype datasets (intersect)
+
+## compare subtype variables in both datasets
